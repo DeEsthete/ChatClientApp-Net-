@@ -1,0 +1,9 @@
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\bin\Debug\ChatClientApp.exe.config
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\bin\Debug\ChatClientApp.exe
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\bin\Debug\ChatClientApp.pdb
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\obj\Debug\ChatClientApp.csprojResolveAssemblyReference.cache
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\obj\Debug\ChatClientApp.csproj.CoreCompileInputs.cache
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\obj\Debug\ChatClientApp.exe
+C:\Users\djoni\Desktop\projects\ChatClientApp-Net-\ChatClientApp\obj\Debug\ChatClientApp.pdb

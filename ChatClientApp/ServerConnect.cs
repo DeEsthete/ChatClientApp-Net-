@@ -12,23 +12,27 @@ namespace ChatClientApp
 {
     public class ServerConnect
     {
+        public bool ServerIsConnect { get; set; }
         private string userName;
         private const int SERVER_PORT = 3535;
-        Socket remoteServerSocket;
-        IPEndPoint endPoint;
+        private const string SERVER_IP = "127.0.0.1";
+        private Socket remoteServerSocket;
+        private IPEndPoint endPoint;
 
-        public void CreateConnect()
+        public void CreateConnect(string user)
         {
+            userName = user;
             remoteServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), SERVER_PORT);
+            endPoint = new IPEndPoint(IPAddress.Parse(SERVER_IP), SERVER_PORT);
 
             try
             {
                 Console.WriteLine("Соединяемся с сервером...");
                 remoteServerSocket.Connect(endPoint);
                 Console.WriteLine("Соединено..");
+                ServerIsConnect = true;
             }
-            catch(SocketException ex)
+            catch (SocketException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -38,7 +42,7 @@ namespace ChatClientApp
         {
             try
             {
-                string serialized = JsonConvert.SerializeObject(new UserMessage { UserName = userName, Message = message});
+                string serialized = JsonConvert.SerializeObject(new UserMessage { UserName = userName, Message = message });
                 remoteServerSocket.Send(Encoding.Default.GetBytes(serialized));
             }
             catch (SocketException ex)
@@ -47,10 +51,17 @@ namespace ChatClientApp
             }
         }
 
-        ~ServerConnect()
+        public void CloseConnect()
         {
+            SendMessage("exit");
+            ServerIsConnect = false;
             remoteServerSocket.Close();
             Console.WriteLine("Сеанс завершен...");
         }
+
+        //~ServerConnect()
+        //{
+        //    CloseConnect();
+        //}
     }
 }
