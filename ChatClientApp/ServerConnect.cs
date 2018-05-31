@@ -59,9 +59,31 @@ namespace ChatClientApp
             Console.WriteLine("Сеанс завершен...");
         }
 
-        //~ServerConnect()
-        //{
-        //    CloseConnect();
-        //}
+        public async void StartAcceptMessage()
+        {
+            await AcceptMessage();
+        }
+
+        public Task AcceptMessage()
+        {
+            return Task.Run(() =>
+            {
+                while (ServerIsConnect)
+                {
+                    int bytes;
+                    byte[] buffer = new byte[1024];
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    do
+                    {
+                        bytes = remoteServerSocket.Receive(buffer);
+                        stringBuilder.Append(Encoding.Default.GetString(buffer, 0, bytes));
+                    }
+                    while (remoteServerSocket.Available > 0);
+
+                    Console.WriteLine(stringBuilder.ToString());
+                }
+            });
+        }
     }
 }
