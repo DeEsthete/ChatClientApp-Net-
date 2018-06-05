@@ -38,22 +38,30 @@ namespace ChatClientApp
             }
         }
 
-        public void SendMessage(string message)
+        public async void SendMessage(string message)
         {
-            try
+            await SendMessageWork(message);
+        }
+
+        public Task SendMessageWork(string message)
+        {
+            return Task.Run(() =>
             {
-                string serialized = JsonConvert.SerializeObject(new UserMessage { UserName = userName, Message = message });
-                remoteServerSocket.Send(Encoding.Default.GetBytes(serialized));
-            }
-            catch (SocketException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+                try
+                {
+                    string serialized = JsonConvert.SerializeObject(new UserMessage { UserName = userName, Message = message });
+                    remoteServerSocket.Send(Encoding.Default.GetBytes(serialized));
+                }
+                catch (SocketException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
         }
 
         public void CloseConnect()
         {
-            SendMessage("exit");
+            SendMessageWork("exit");
             ServerIsConnect = false;
             remoteServerSocket.Close();
             Console.WriteLine("Сеанс завершен...");

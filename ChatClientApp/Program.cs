@@ -18,7 +18,7 @@ namespace ChatClientApp
             Console.WriteLine("Для того что бы выйти из чата, введите слово 'exit'");
             Console.WriteLine("-----------------------");
             server.CreateConnect(userName);
-            server.SendMessage("init");
+            server.SendMessageWork("init");
             server.StartAcceptMessage();
             while (true)
             {
@@ -31,7 +31,7 @@ namespace ChatClientApp
                 }
                 else
                 {
-                    server.SendMessage(message);
+                    server.SendMessageWork(message);
                 }
             }
         }
